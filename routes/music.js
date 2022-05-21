@@ -66,4 +66,14 @@ router.get("/search", function (req, res, next) {
   }
 });
 
+router.get("/top", function(req, res, next) {
+  let url = ` http://mp3.zing.vn/xhr/chart-realtime?songId=0&videoId=0&albumId=0&chart=song&time=-1`;
+  fetch(url)
+    .then((response) => response.json())
+    .then((json) => {
+      res.json(json.data['song']);
+      // res.render("musics/search", { lists: json.data[0]['song'], search: req.query.search });
+    });
+})
+
 module.exports = router;
