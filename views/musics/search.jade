@@ -1,0 +1,10 @@
+extends ../layout
+
+block content
+  form(method="get" action="/music/search")
+    input.form-control(name="search" value=search)
+    button.submit search
+  each item in lists
+    a.list(href=`/music/play/${item.id}`)
+      div= item.name
+     

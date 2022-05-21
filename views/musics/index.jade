@@ -1,0 +1,11 @@
+extends ../layout
+
+block content
+  h1= title
+  form(method="get" action="/music/search")
+    input.form-control(name="search")
+    button.submit search
+  each item in lists
+    a.list(href=`/music/show/${item.code}`)
+      img(src=`${item.thumbnail}`)
+      div= item.title
