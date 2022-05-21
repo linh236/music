@@ -40,23 +40,30 @@ router.get("/play/:id", function (req, res, next) {
   )
     .then((response) => response.json())
     .then((json) => {
-      if (json.source !== undefined) {
-        // res.render("musics/play", { song: json.source });
-        res.json(json.source);
-      } else {
-        res.send("This music not video");
-      }
+        res.json(json);
+
+      // if (json.source !== undefined) {
+      //   // res.render("musics/play", { song: json.source });
+      //   res.json(json.source);
+      //   console.log(json.source);
+      // } else {
+      //   res.send("This music not video");
+      // }
     });
 });
 
 router.get("/search", function (req, res, next) {
-  let url = `http://ac.mp3.zing.vn/complete?type=artist,song,key,code&num=500&query=${req.query.search}`;
-  fetch(url)
-    .then((response) => response.json())
-    .then((json) => {
-      res.json(json.data[0]['song']);
-      // res.render("musics/search", { lists: json.data[0]['song'], search: req.query.search });
-    });
+  if (req.query.search === undefined || req.query.search === "") {
+    res.json({ data: [] });
+  } else {
+    let url = `http://ac.mp3.zing.vn/complete?type=artist,song,key,code&num=500&query=${req.query.search}`;
+    fetch(url)
+      .then((response) => response.json())
+      .then((json) => {
+        res.json(json.data[0]["song"]);
+        // res.render("musics/search", { lists: json.data[0]['song'], search: req.query.search });
+      });
+  }
 });
 
 module.exports = router;
