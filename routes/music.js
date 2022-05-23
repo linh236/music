@@ -9,8 +9,8 @@ router.get("/", async function (req, res, next) {
   fetch("http://mp3.zing.vn/xhr/recommend?type=audio")
     .then((response) => response.json())
     .then((json) => {
-      res.json(json.data["items"]);
-      // res.render("musics/index", { lists: json.data["items"] });
+      // res.json(json.data["items"]);
+      res.render("musics/index", { lists: json.data["items"] });
     });
 });
 
@@ -40,15 +40,15 @@ router.get("/play/:id", function (req, res, next) {
   )
     .then((response) => response.json())
     .then((json) => {
-        res.json(json);
+        // res.json(json);
 
-      // if (json.source !== undefined) {
-      //   // res.render("musics/play", { song: json.source });
-      //   res.json(json.source);
-      //   console.log(json.source);
-      // } else {
-      //   res.send("This music not video");
-      // }
+      if (json.source !== undefined) {
+        // res.render("musics/play", { song: json.source });
+        res.json(json.source);
+        console.log(json.source);
+      } else {
+        res.send("This music not video");
+      }
     });
 });
 
@@ -60,8 +60,8 @@ router.get("/search", function (req, res, next) {
     fetch(url)
       .then((response) => response.json())
       .then((json) => {
-        res.json(json.data[0]["song"]);
-        // res.render("musics/search", { lists: json.data[0]['song'], search: req.query.search });
+        // res.json(json.data[0]["song"]);
+        res.render("musics/search", { lists: json.data[0]['song'], search: req.query.search });
       });
   }
 });
@@ -71,8 +71,8 @@ router.get("/top", function(req, res, next) {
   fetch(url)
     .then((response) => response.json())
     .then((json) => {
-      res.json(json.data['song']);
-      // res.render("musics/search", { lists: json.data[0]['song'], search: req.query.search });
+      // res.json(json.data['song']);
+      res.render("musics/search", { lists: json.data[0]['song'], search: req.query.search });
     });
 })
 
