@@ -43,8 +43,8 @@ router.get("/play/:id", function (req, res, next) {
         // res.json(json);
 
       if (json.source !== undefined) {
-        // res.render("musics/play", { song: json.source });
-        res.json(json.source);
+        res.render("musics/play", { song: json.source });
+        // res.json(json.source);
         console.log(json.source);
       } else {
         res.send("This music not video");
